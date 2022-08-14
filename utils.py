@@ -43,4 +43,4 @@ def get_loaders(
         shuffle=False,
     )
 
-    return train_loader#, val_loader
+    return train_loader, val_loader
