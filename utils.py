@@ -28,7 +28,7 @@ def get_loaders(
         batch_size=batch_size,
         num_workers=num_workers,
         pin_memory=pin_memory,
-        shuffle=True,
+        shuffle=False,
     )
 
     val_ds = QcellValDataset(
