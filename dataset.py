@@ -17,14 +17,14 @@ class QcellTrainDataset(Dataset):
 
     def __len__(self):
         return len(self.images_LT)
-
+    '''
     def __getitem__(self, index):
         image_path = os.path.join(self.image_dir, self.images_LT[index])
         image = plt.imread(image_path)
         label = self.label_list[(int(self.images[index][0:5])+1)//500]
 
         return image, label
-    
+    '''
     def __getitem__(self, index):
         image = np.zeros((111,111,4))
         image_path = os.path.join(self.image_dir, self.images_LT[index])
@@ -46,7 +46,7 @@ class QcellValDataset(Dataset):
 
     def __len__(self):
         return len(self.images)
-
+    '''
     def __getitem__(self, index):
         image_path = os.path.join(self.image_dir, self.images[index])
         image = plt.imread(image_path)
@@ -56,10 +56,12 @@ class QcellValDataset(Dataset):
     '''
     def __getitem__(self, index):
         image = np.zeros((111,111,4))
-        for i in range(4):
-            image_path = os.path.join(self.image_dir, self.images[index//4*4+i])
+        image_path = os.path.join(self.image_dir, self.images_LT[index])
+        image[:,:,0] = plt.imread(image_path)
+        for i in range(1,4):
+            image_path = os.path.join(self.image_dir, self.images[index*4+i])
             image[:,:,i] = plt.imread(image_path)
-        label = self.label_list[(int(self.images[index][0:5])+1)//50]
+        label = self.label_list[(int(self.images[index][0:5])+1)//500]
 
         return image, label
-    '''
+    
